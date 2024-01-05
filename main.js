@@ -13,7 +13,14 @@ const Gameboard = (() => {
     });
   };
 
-  return { render };
+  const update = (index, value) => {
+    gameboard[index] = value;
+    render();
+  };
+
+  const getGameboard = () => gameboard;
+
+  return { render, update, getGameboard };
 })();
 
 const createPlayer = (name, mark) => {
@@ -41,7 +48,9 @@ const Game = (() => {
 
   const handleClick = (e) => {
     let index = parseInt(e.target.id.split("-")[1]);
-    console.log(index);
+    if (Gameboard.getGameboard()[index] !== "") return;
+    Gameboard.update(index, players[currentPlayerIndex].mark);
+    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
   };
 
   return { start, handleClick };
