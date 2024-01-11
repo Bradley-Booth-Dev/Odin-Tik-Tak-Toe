@@ -85,7 +85,14 @@ const Game = (() => {
 
 const startButton = document.querySelector(".start-button");
 startButton.addEventListener("click", () => {
-  Game.start();
+  const player1Name = document.querySelector("#player1").value;
+  const player2Name = document.querySelector("#player2").value;
+
+  if (player1Name.trim() === "" || player2Name.trim() === "") {
+    displayController.renderMessage("Please enter both player names!");
+  } else {
+    Game.start();
+  }
 });
 
 const restartButton = document.querySelector(".restart-button");
